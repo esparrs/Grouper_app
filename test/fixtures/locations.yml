@@ -1,0 +1,15 @@
+one:
+  event_name: MyString
+  start_time: 2013-04-08 11:44:31
+  end_time: 2013-04-08 11:44:31
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  event_name: MyString
+  start_time: 2013-04-08 11:44:31
+  end_time: 2013-04-08 11:44:31
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5

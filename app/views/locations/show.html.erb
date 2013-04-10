@@ -1,0 +1,33 @@
+<% title "Talk Grouper" %>
+<h3>
+  <strong>Event Name:</strong>
+  <%= @location.event_name %>
+</h3>
+<p>
+  <strong>Start Time:</strong>
+  <%= @location.start_time %>
+</p>
+<p>
+  <strong>End Time:</strong>
+  <%= @location.end_time %>
+</p>
+<p>
+  <strong>Address:</strong>
+  <%= @location.address %>
+</p>
+
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+<h3>Nearby Events</h3>
+<ul>
+<% for location in @location.nearbys(0.8) %>
+  <li><%= link_to location.event_name, location %> <br> <%= location.start_time%> - <%=location.end_time%> <br> <%=location.address%> (<%= location.distance.round(0.1) %> miles)</li>
+<% end %>
+</ul>
+
+<p>
+  <%= link_to "Edit", edit_location_path(@location) %> |
+  <%= link_to "Destroy", @location, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", locations_path %>
+</p>
