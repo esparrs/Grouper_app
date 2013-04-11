@@ -1,33 +1,63 @@
-<% title "Talk Grouper" %>
+<h1> 
+  <font face="century gothic, palatino, arial"> 
+    <font size="48"> 
+      <u>Talk Grouper</u>
+      <%= image_tag("grouper.png", :alt => "nil") %> 
+    </font size>
+    <font size="5">
+      (Unofficial App) 
+    </font size>
+  </font face>
+</h1>
+
 <h3>
-  <strong>Event Name:</strong>
-  <%= @location.event_name %>
+    <font size="6">
+      <font face="century gothic, palatino, arial"> 
+        <%= @location.event_name %>
+      </font face>
+    </font size>
 </h3>
 <p>
   <strong>Start Time:</strong>
-  <%= @location.start_time %>
+  <%= @location.start_time.ctime() %>
 </p>
 <p>
   <strong>End Time:</strong>
-  <%= @location.end_time %>
+  <%= @location.end_time.ctime() %>
 </p>
 <p>
-  <strong>Address:</strong>
   <%= @location.address %>
 </p>
 
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 
-<h3>Nearby Events</h3>
+<h3>
+  <font size="5"> 
+    <font face="century gothic, palatino, arial"> 
+      Nearby Events
+    </font face>
+  </font size>
+</h3>
 <ul>
-<% for location in @location.nearbys(0.8) %>
-  <li><%= link_to location.event_name, location %> <br> <%= location.start_time%> - <%=location.end_time%> <br> <%=location.address%> (<%= location.distance.round(0.1) %> miles)</li>
+<% for location in @location.nearbys(0.8, :order => 'start_time, distance') %>
+  <% if location.end_time > DateTime.now %>
+    <li>
+      <font size="3"> 
+        <font face="century gothic, palatino, arial"> 
+          <%= link_to location.event_name, location %> 
+        </font face>
+      </font size>
+      <br> <%= location.start_time.ctime() %> - <%=location.end_time.ctime() %> 
+      <br> <%=location.address%> (<%= location.distance.round(1) %> miles)
+    </li>
+  <% end %>
 <% end %>
 </ul>
 
 <p>
-  <%= link_to "Edit", edit_location_path(@location) %> |
-  <%= link_to "Destroy", @location, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Edit", edit_location_path(@location) %>
   <%= link_to "View All", locations_path %>
+  <%= button_to "Destroy", @location, :confirm => 'Are you sure?', :method => :delete %>
+  
 </p>

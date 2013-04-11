@@ -32,6 +32,9 @@ end
 
 gem "nifty-generators", :group => :development
 
+gem "pg", :group => :production
+gem "sqlite3-ruby", :group => :development
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,32 +1,75 @@
-<% title "Talk Grouper" %>
+<head>
+  <link rel="stylesheet" href="application.css">
+</head>
+
+<h1> 
+  <font face="century gothic, palatino, arial"> 
+    <font size="48"> 
+      <u>Talk Grouper</u>
+      <%= image_tag("grouper.png", :alt => "nil") %> 
+    </font size>
+    <font size="5">
+      (Unofficial App) 
+    </font size>
+  </font face>
+</h1>
+
+<h2>
+  <font face="century gothic, palatino, arial">
+    <%= image_tag("MIT_CPW.jpg", :alt => "nil") %> Events Close To You
+  </font face>
+</h2>
 
 <%= form_tag locations_path, :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Near", :name => nil %>
+    <%= submit_tag "Search Events Near You", :name => nil %>
   </p>
 <% end %>
 
-<h2>CPW Events</h2>
 <table>
-  <tr>
-    <th>Event Name</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-    <th>Address</th>
-  </tr>
   <% for location in @locations %>
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{location.latitude}%2C#{location.longitude}" %>
     <tr>
-      <td><%= location.event_name %></td>
-      <td><%= location.start_time %></td>
-      <td><%= location.end_time %></td>
-      <td><%= location.address %></td>
-      <td><%= link_to "Show", location %></td>
-      <td><%= link_to "Edit", edit_location_path(location) %></td>
-      <td><%= link_to "Destroy", location, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td>
+        <font size="5">
+          <font face="century gothic, palatino, arial">
+            <strong>
+            <%= link_to location.event_name, location %>
+            </strong>
+          </font face>
+        </font size>
+      </td>
+    </tr>
+    <tr>
+      <td><%= location.start_time.ctime() + " - " + location.end_time.ctime() %></td>
+    </tr>
+    <tr>
+      <td>
+        <%= location.address %>
+      </td>
+    </tr>
+      <td><%= link_to "Show", location %> <%= link_to "Edit", edit_location_path(location) %> <%= button_to "Destroy", location, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 
 <p><%= link_to "New Event", new_location_path %></p>
+
+
+
+<script>
+var s = document.getElementById("search");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+function showPosition(position)
+  {
+  s.value = position.coords.latitude + "," + position.coords.longitude;
+  }
+    getLocation();
+</script>

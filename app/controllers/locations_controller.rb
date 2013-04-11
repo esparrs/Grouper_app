@@ -1,9 +1,9 @@
 class LocationsController < ApplicationController
   def index
     if params[:search].present?
-      @locations = Location.near(params[:search], 0.8, :order => :distance)
+      @locations = Location.where("end_time>?", DateTime.now).near(params[:search], 0.75, :order => 'start_time, distance')
     else
-      @locations = Location.where("end_time>?", DateTime.now)
+      @locations = Location.where("end_time>?", DateTime.now).order(:start_time)
     end
   end
 
