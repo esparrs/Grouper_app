@@ -28,6 +28,9 @@
 <p>
   <%= @location.address %>
 </p>
+<p>
+  <%= @location.description %>
+</p>
 
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
