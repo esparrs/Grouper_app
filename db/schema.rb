@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411015746) do
+ActiveRecord::Schema.define(:version => 20130504041224) do
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "place_id"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "other"
+    t.datetime "date"
+  end
+
+  add_index "events", ["place_id"], :name => "index_events_on_place_id"
 
   create_table "locations", :force => true do |t|
     t.string   "event_name"
@@ -23,6 +37,17 @@ ActiveRecord::Schema.define(:version => 20130411015746) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "description"
+  end
+
+  create_table "places", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "string"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "address"
   end
 
 end

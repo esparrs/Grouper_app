@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-
+gem 'hirb'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -22,12 +22,11 @@ end
 gem 'jquery-rails'
 
 gem 'geocoder'
-
+gem 'rest-client'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'sqlite3', '1.3.7'
 end
 
 gem "nifty-generators", :group => :development

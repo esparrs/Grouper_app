@@ -1,0 +1,79 @@
+<head>
+  <link rel="stylesheet" href="application.css">
+</head>
+
+<h1>
+  <font face="century gothic, palatino, arial">
+    <font size="48">
+      <u>Talk Grouper</u>
+      <%= image_tag("grouper.png", :alt => "nil") %>
+    </font size>
+  </font face>
+</h1>
+
+<h2>
+  <font face="century gothic, palatino, arial">
+    <%= image_tag("MIT_CPW.jpg", :alt => "nil") %> Events Close To You
+  </font face>
+</h2>
+
+<%= form_tag locations_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Events Near You", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+  <% for location in @locations %>
+    <tr>
+      <td>
+        <font size="5">
+          <font face="century gothic, palatino, arial">
+            <strong>
+            <%= link_to location.name, location %>
+            </strong>
+          </font face>
+        </font size>
+      </td>
+    </tr>
+    <tr>
+      <td><%= location.start.strftime("%I:%M%p") + " - " + location.end.strftime("%I:%M%p") %></td>
+    </tr>
+    <tr>
+      <td>
+        <% if location.place%>
+        <%= location.place.name %>
+        <%end%>
+      </td>
+    </tr>
+      <td><%= link_to "Show", location %> <%= link_to "Edit", edit_location_path(location) %> <%= button_to "Destroy", location, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Event", new_location_path %></p>
+
+<footer>
+  <font size="3">
+      (Has no official affiliation to MIT Admissions)
+  </font size>
+</footer>
+
+
+<script>
+var s = document.getElementById("search");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+function showPosition(position)
+  {
+  s.value = position.coords.latitude + "," + position.coords.longitude;
+  }
+    getLocation();
+</script>
