@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'geocoder'
 gem 'rest-client'
 group :development do
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'

@@ -11,11 +11,7 @@
   </font face>
 </h1>
 
-<h2>
-  <font face="century gothic, palatino, arial">
-    <%= image_tag("MIT_CPW.jpg", :alt => "nil") %> Events Close To You
-  </font face>
-</h2>
+
 
 <%= form_tag locations_path, :method => :get do %>
   <p>
@@ -47,6 +43,7 @@
         <%end%>
       </td>
     </tr>
+    <tr>
       <td><%= link_to "Show", location %> <%= link_to "Edit", edit_location_path(location) %> <%= button_to "Destroy", location, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>

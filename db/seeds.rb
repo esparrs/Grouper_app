@@ -40,7 +40,23 @@ datadump.each do |event|
       end
     end
   end
-  e = Event.new(:name => eh["N"], :start => eh["S"], :end => eh["E"], :other => eh["O"], :date => eh["D"])
+
+  e = Event.new(:name => eh["N"], :other => eh["O"], :date => eh["D"])
+  if eh["S"]
+    time_to_merge = eh["S"]
+  else
+    time_to_merge = Time.new(2002, 10, 31, 0, 0, 0)
+  end
+  merged_datetime1 = DateTime.new(eh["D"].year, eh["D"].month,eh["D"].day, time_to_merge.hour,time_to_merge.min, time_to_merge.sec)
+  e.start = merged_datetime1
+
+  if eh["E"]
+    time_to_merge2 = eh["E"]
+  else
+    time_to_merge2 = Time.new(2002, 10, 31, 0, 0, 0)
+  end
+  merged_datetime2 = DateTime.new(eh["D"].year, eh["D"].month,eh["D"].day, time_to_merge2.hour,time_to_merge2.min, time_to_merge2.sec)
+  e.end = merged_datetime2
   unless eh["P"].nil?
     p = Place.where(:id => eh["P"]).first
     e.place = p
